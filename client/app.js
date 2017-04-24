@@ -19,6 +19,14 @@ app.factory("itemFactory", function ($http) {
       foundItems(response.data.items);
     });
   };
+  factory.createCategory = function (category, createdCategory) {
+    $http.post("/api/categories", category).then(function (response) {
+      console.log("CATEGORY:", response.data.category);
+      createdCategory(true);
+    }).catch(function (error) {
+      createdCategory(false);
+    });
+  }
   factory.createItem = function (item, createdItem) {
     $http.post("/api/items", item).then(function (response) {
       createdItem(true);
@@ -68,9 +76,15 @@ app.controller("newItemController", function ($scope, $location, itemFactory){
     });
   };
 });
-app.controller("newCategoryController", function ($scope) {
+app.controller("newCategoryController", function ($scope, itemFactory) {
   $scope.submitForm = function () {
-    alert($scope.category.name);
+    itemFactory.createCategory($scope.category, function (success) {
+      if (success) {
+        alert("SUCCESS");
+      } else {
+        alert("ERROR");
+      }
+    })
   }
 });
 
