@@ -11,6 +11,6 @@ module.exports = function (app)
     app.get("/api/categories", categories.index);
     app.post("/api/categories", categories.create);
     app.get("/api/items", items.index);
-    app.post("/api/items", items.create);
+    app.post("/api/categories/:categoryId/items", items.create);
     app.post("/api/items/:itemId/subitems", subItems.create);
 }
