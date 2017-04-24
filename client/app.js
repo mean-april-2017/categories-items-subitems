@@ -15,20 +15,23 @@ app.factory("itemFactory", function ($http) {
   var factory = {};
   factory.getAllItems = function (foundItems) {
     $http.get("/api/items").then(function (response) {
-      console.log("RESPONSE:", response);
       foundItems(response.data.items);
     });
   };
+  factory.getAllCategories = function (foundCategories) {
+    $http.get("/api/categories").then(function (response) {
+      foundCategories(response.data.categories);
+    });
+  }
   factory.createCategory = function (category, createdCategory) {
     $http.post("/api/categories", category).then(function (response) {
-      console.log("CATEGORY:", response.data.category);
       createdCategory(true);
     }).catch(function (error) {
       createdCategory(false);
     });
   }
   factory.createItem = function (item, createdItem) {
-    $http.post("/api/items", item).then(function (response) {
+    $http.post("/api/categories/" + item.category._id + "/items", item).then(function (response) {
       createdItem(true);
     }).catch(function (error) {
       createdItem(false);
@@ -65,6 +68,10 @@ app.controller("itemsIndexController", function ($scope, itemFactory) {
 
 });
 app.controller("newItemController", function ($scope, $location, itemFactory){
+  itemFactory.getAllCategories(function (categories) {
+    $scope.categories = categories;
+    $scope.item = { category: categories[0] };
+  });
   $scope.submitForm = function () {
     itemFactory.createItem($scope.item, function (success) {
       if (success) {

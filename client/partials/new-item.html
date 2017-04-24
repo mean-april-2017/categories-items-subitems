@@ -1,5 +1,6 @@
 <form ng-submit="submitForm()">
   <h3>New Item</h3>
   <input type="text" ng-model="item.title" placeholder="Title">
+  <select ng-model="item.category" ng-options="category.name for category in categories"></select>
   <button type="submit">Create</button>
 </form>
