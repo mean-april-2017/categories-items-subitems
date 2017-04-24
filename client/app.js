@@ -7,7 +7,8 @@ app.config(function ($routeProvider) {
     templateUrl: "/partials/new-item.html",
     controller: "newItemController"
   }).when("/new-category", {
-    templateUrl: "/partials/new-category.html"
+    templateUrl: "/partials/new-category.html",
+    controller: "newCategoryController"
   });
 });
 app.factory("itemFactory", function ($http) {
@@ -67,3 +68,22 @@ app.controller("newItemController", function ($scope, $location, itemFactory){
     });
   };
 });
+app.controller("newCategoryController", function ($scope) {
+  $scope.submitForm = function () {
+    alert($scope.category.name);
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
