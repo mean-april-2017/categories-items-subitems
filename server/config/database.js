@@ -11,3 +11,4 @@ mongoose.connect("mongodb://localhost/full-mean", function (err) {
     }
 });
 require("../models/item");  // Require Item DB Model
+require("../models/category");  // Require Category DB Model
