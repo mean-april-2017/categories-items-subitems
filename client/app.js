@@ -6,6 +6,8 @@ app.config(function ($routeProvider) {
   }).when("/new", {
     templateUrl: "/partials/new-item.html",
     controller: "newItemController"
+  }).when("/new-category", {
+    templateUrl: "/partials/new-category.html"
   });
 });
 app.factory("itemFactory", function ($http) {
