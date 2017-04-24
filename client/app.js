@@ -9,6 +9,9 @@ app.config(function ($routeProvider) {
   }).when("/new-category", {
     templateUrl: "/partials/new-category.html",
     controller: "newCategoryController"
+  }).when("/categories", {
+    templateUrl: "/partials/categories-index.html",
+    controller: "categoriesIndexController"
   });
 });
 app.factory("itemFactory", function ($http) {
@@ -49,7 +52,6 @@ app.factory("itemFactory", function ($http) {
 app.controller("itemsIndexController", function ($scope, itemFactory) {
   function loadItemsIntoScope () {
     itemFactory.getAllItems(function (items) {
-      console.log("ITEMS:", items);
       $scope.items = items;
     });
   }
@@ -94,7 +96,12 @@ app.controller("newCategoryController", function ($scope, itemFactory) {
     })
   }
 });
-
+app.controller("categoriesIndexController", function ($scope, itemFactory) {
+  itemFactory.getAllCategories(function (categories) {
+    console.log("CATEGORIES:", categories);
+    $scope.categories = categories;
+  });
+});
 
 
 

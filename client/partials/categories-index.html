@@ -1,0 +1,14 @@
+<h4>Categories</h4>
+<ul>
+  <li ng-repeat="category in categories">
+    <h4>{{ category.name }}</h4>
+    <ul>
+      <li ng-repeat="item in category.items">
+        <h5>{{ item.title }}</h5>
+        <ul>
+          <li ng-repeat="subItem in item.subItems">{{ subItem.content }}</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
